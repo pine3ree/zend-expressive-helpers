@@ -51,6 +51,11 @@ class UrlHelper
      */
     public function __invoke($route = null, array $params = [])
     {
+        if (is_array($route)) {
+            $params = $route;
+            $route  = null;
+        }
+
         $result = $this->getRouteResult();
         if ($route === null && $result === null) {
             throw new Exception\RuntimeException(
